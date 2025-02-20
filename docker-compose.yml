@@ -1,0 +1,26 @@
+version: '3'
+services:
+  simple-streamer:
+    image: dbosnich800/usd-composer-test:latest
+    privileged: true
+    network_mode: host
+    ports:
+      - '49100:49100/tcp'
+      - '47998:47998/udp'
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
+  web:
+    image: dbosnich800/test-client:brev-demo
+    restart: unless-stopped
+    network_mode: host
+    ports:
+      - '80:80/tcp'
+    environment:
+      - NGINX_HOST=0.0.0.0
+
