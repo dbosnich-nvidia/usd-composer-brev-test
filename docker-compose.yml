@@ -1,6 +1,6 @@
 version: '3'
 services:
-  simple-streamer:
+  usd-composer:
     image: dbosnich800/usd-composer-test:latest
     privileged: true
     network_mode: host
